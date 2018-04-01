@@ -1,3 +1,4 @@
 /node_modules/
 .tern-port
 .tern-project
+/package-lock.json
