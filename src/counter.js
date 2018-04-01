@@ -1,4 +1,4 @@
-class Counter {
+export default class Counter {
     constructor(ctx, duration) {
 	this.ctx = ctx;
 	this.w = 40;
