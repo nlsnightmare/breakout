@@ -1,7 +1,7 @@
 const KEY_D = 68;
 const KEY_A = 65;
 
-class Player {
+export default class Player {
     constructor(ctx) {
 	this.ctx = ctx;
 	this.h = 25;
