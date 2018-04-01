@@ -1,3 +1,10 @@
+import Ball from './ball';
+import Player from './player.js';
+import Block from './block';
+import Counter from './counter';
+import Powerup from './powerup';
+
+
 const debug = false;
 let ball;
 let player;
@@ -90,7 +97,7 @@ function draw(){
 	    powerups.splice(i,1);
 	    player.getPowerup(p.type);
 	    counter = new Counter(ctx,15 * 1000);
-	    setTimeout(() => delete counter);
+	    setTimeout(() => counter = undefined );
 	}
 
 	if (p.pos.y - p.r > ctx.height) {
