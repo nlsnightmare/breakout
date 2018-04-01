@@ -1,4 +1,4 @@
-class Ball {
+export default class Ball {
     constructor(ctx){
 	this.ctx = ctx;
 	this.r = 20;
