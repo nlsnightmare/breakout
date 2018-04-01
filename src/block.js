@@ -1,4 +1,4 @@
-class Block {
+export default class Block {
     constructor(ctx,x,y) {
 	this.ctx = ctx;
 	
@@ -17,12 +17,6 @@ class Block {
 	    this.ctx.fillStyle = "rgb(0," + Math.round(255 / this.lives) + ",20)";
 
 	this.ctx.fillRect(this.pos.x- this.w/2,this.pos.y - this.h/2,this.w,this.h);
-
-	if (debug) {
-	    this.ctx.fillStyle = 'cyan';
-	    this.ctx.font = "30px Arial";
-	    this.ctx.fillText(this.lives,this.pos.x - this.w/2, this.pos.y);
-	}
     }
 
     loseLife(){
