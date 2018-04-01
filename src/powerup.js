@@ -1,4 +1,6 @@
-class Powerup extends Ball {
+import Ball from './ball';
+
+export default class Powerup extends Ball {
     constructor(ctx,x,y) {
 	super(ctx,x,y);
 	
