@@ -7,7 +7,7 @@
     "scripts": {
 	"watch": "webpack-dev-server",
 	"build": "webpack",
-	"build-production": "webpack -p"
+	"build-prod": "webpack -p"
     },
     "author": "Nikos Maroulakis",
     "license": "ISC",
