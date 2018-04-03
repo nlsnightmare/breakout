@@ -5,7 +5,6 @@ import Counter from './counter';
 import Powerup from './powerup';
 
 
-const debug = false;
 let ball;
 let player;
 let counter;
@@ -46,7 +45,7 @@ function handleCollision(data,b, name) {
 function handleBlocks(){
     for (let name in blocks) {
 	let b = blocks[name];
-	const data = ball.checkCollision(b);
+	let data = ball.checkCollision(b);
 	handleCollision(data,b,name);
 	b.draw();
     }
