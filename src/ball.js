@@ -56,12 +56,7 @@ export default class Ball {
 	return ret;
     }
 
-    move(isforced = false){
-	if (isforced) {
-	    this.pos.x += 2 * this.velocity.x;
-	    this.pos.y += 2 * this.velocity.y;
-	    return;
-	}
+    move(){
 	this.pos.x += this.velocity.x;
 	this.pos.y += this.velocity.y;
 	if (this.pos.x + this.r > this.ctx.width){

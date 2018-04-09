@@ -50,7 +50,6 @@ function handleCollision(data,b, name) {
 		ball.velocity.x *= -1;
 	    else
 		ball.velocity.y *= -1;
-	    ball.move(true);
 	}
     }
 }
