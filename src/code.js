@@ -5,6 +5,7 @@ import Counter from './counter';
 import Powerup from './powerup';
 
 
+
 let ball;
 let player;
 let counter;
@@ -25,6 +26,19 @@ const dt = 1000 / 60; // 60FPS
 
 function handleCollision(data,b, name) {
     if (data.hasCollided) {
+
+	//reposition the ball
+	const disX = ball.x - b.pos.x;
+	const disY = ball.y - b.pos.y;
+
+	if (Math.abs(disX) > Math.abs(disY)) {
+	    ball.x -= Math.sign(disX)*data.x;
+	}
+	else{
+	    ball.y -= Math.sign(disY)*data.y;
+	}
+
+
 	if (b.loseLife()) {
 	    if (b.hasPowerUp) {
 		powerups.push(new Powerup(ctx, b.pos.x,b.pos.y));

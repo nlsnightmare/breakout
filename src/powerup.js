@@ -4,7 +4,7 @@ export default class Powerup extends Ball {
     constructor(ctx,x,y) {
 	super(ctx,x,y);
 	
-	this.fallspeed = Math.random(3,6);
+	this.fallspeed = Math.random() * 6 - 3;
 
 	let t = Math.random();
 	this.type = '';

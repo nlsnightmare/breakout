@@ -20,7 +20,6 @@ export default class Block {
     }
 
     loseLife(){
-	console.log('i lost a life!');
 	this.lives--;
 	if (this.lives <= 0) {
 	    return true;
