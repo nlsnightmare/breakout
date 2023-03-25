@@ -1,19 +1,15 @@
 {
-   "name": "breakout",
-   "version": "1.0.0",
-   "description": "A breakout clone written in js",
-   "main": "code.js",
-   "private": "true",
-   "scripts": {
-      "serve": "webpack-dev-server --inline --hot",
-      "build": "webpack",
-      "build-prod": "webpack -p"
-   },
-   "author": "Nikos Maroulakis",
-   "license": "ISC",
-   "devDependencies": {
-      "webpack": "^4.5.0",
-      "webpack-cli": "^3.2.1",
-      "webpack-dev-server": "^3.1.14"
-   }
+  "name": "breakout",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0"
+  }
 }
