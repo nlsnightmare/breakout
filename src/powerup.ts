@@ -1,16 +1,19 @@
 import Ball from "./ball";
+import { Vec2 } from "./commonTypes";
 import { Context } from "./main";
 
-export type PowerupType = "enlarge" | "shrink" | "slower" | "faster";
+export type PowerupType =
+	| "enlarge"
+	| "shrink"
+	| "slower"
+	| "faster";
 
 export default class Powerup extends Ball {
 	private fallspeed: number;
 	public readonly type: PowerupType;
 
-	constructor(ctx: Context, x: number, y: number) {
-		super(ctx);
-		this.position.x = x;
-		this.position.y = y;
+	constructor(public position: Vec2) {
+		super();
 
 		this.fallspeed = Math.random() * 6 - 3;
 
@@ -21,11 +24,11 @@ export default class Powerup extends Ball {
 		else this.type = "faster";
 	}
 
-	draw() {
-		this.ctx.fillStyle = "rgb(123,43,255)";
-		this.ctx.beginPath();
-		this.ctx.arc(this.position.x, this.position.y, this.r, 0, 2 * Math.PI);
-		this.ctx.fill();
+	draw(ctx: Context): void {
+		ctx.fillStyle = "rgb(123,43,255)";
+		ctx.beginPath();
+		ctx.arc(this.position.x, this.position.y, this.r, 0, 2 * Math.PI);
+		ctx.fill();
 	}
 
 	move() {

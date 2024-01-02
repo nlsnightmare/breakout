@@ -1,28 +1,33 @@
 import { Context } from "./main";
 
 export default class Counter {
-	remaining: number;
-	w: number;
+	private readonly durationMs: number;
+	private remainingMs: number;
+
+	private readonly w: number;
 
 	constructor(
-		private readonly ctx: Context,
-		private readonly duration: number,
+		durationSeconds: number,
 	) {
 		this.w = 40;
-		this.remaining = this.duration;
+		this.durationMs = durationSeconds * 1000;
+		this.remainingMs = this.durationMs;
 	}
 
-	draw(dt: number) {
-		this.remaining -= dt;
+	get percentage(): number {
+		return (this.remainingMs / this.durationMs) * 100;
+	}
 
-		this.ctx.fillStyle = "black";
-		this.ctx.fillRect(20, this.ctx.height - 22, 100, 20);
-		this.ctx.fillStyle = "yellow";
-		this.ctx.fillRect(
-			20,
-			this.ctx.height - 22,
-			(this.remaining / this.duration) * 100,
-			20,
-		);
+	tick(dt: number) {
+		this.remainingMs -= dt;
+	}
+
+	draw(context: Context) {
+		const startY = context.canvas.height - 22;
+
+		context.fillStyle = "black";
+		context.fillRect(20, startY, 100, 20);
+		context.fillStyle = "yellow";
+		context.fillRect(20, startY, this.percentage, 20);
 	}
 }

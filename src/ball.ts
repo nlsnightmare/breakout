@@ -3,68 +3,73 @@ import { Context } from "./main";
 
 const DEFAULT_RADIUS = 20;
 
-export type CollisionResult = Vec2;
-
 class Ball {
 	public r: number = DEFAULT_RADIUS;
-	protected r2: number = Math.pow(DEFAULT_RADIUS, 2);
+	protected rSquared: number = Math.pow(DEFAULT_RADIUS, 2);
 	position: Vec2 = { x: 300, y: 200 };
 	velocity: Vec2 = { x: 0, y: 3 };
 
-	constructor(protected readonly ctx: Context) { }
-
-	draw() {
-		this.ctx.fillStyle = "grey";
-		this.ctx.beginPath();
-		this.ctx.arc(this.position.x, this.position.y, this.r, 0, 2 * Math.PI);
-		this.ctx.fill();
+	draw(ctx: Context): void {
+		ctx.fillStyle = "grey";
+		ctx.beginPath();
+		ctx.arc(this.position.x, this.position.y, this.r, 0, 2 * Math.PI);
+		ctx.fill();
 	}
 
-	checkCollision(rect: Rect): CollisionResult | null {
-		let dist = {
+	checkCollision(rect: Rect): Vec2 | null {
+		let dist: Vec2 = {
 			x: Math.abs(this.position.x - rect.position.x),
 			y: Math.abs(this.position.y - rect.position.y),
 		};
 
-		const min_dis_x = rect.w / 2 + this.r;
-		const min_dis_y = rect.h / 2 + this.r;
+		const minDistX = rect.w / 2 + this.r;
+		const minDistY = rect.h / 2 + this.r;
 
-		if (dist.x > min_dis_x || dist.y > min_dis_y) {
+		if (dist.x > minDistX || dist.y > minDistY) {
 			return null;
 		}
 
 		if (dist.x <= rect.w / 2 || dist.y <= rect.h / 2) {
 			return {
-				x: dist.x - min_dis_x,
-				y: dist.y - min_dis_y,
+				x: dist.x - minDistX,
+				y: dist.y - minDistY,
 			};
 		}
 
 		let cornerDistance_sq =
 			Math.pow(dist.x - rect.w / 2, 2) + Math.pow(dist.y - rect.h / 2, 2);
 
-		if (cornerDistance_sq > this.r2) {
+		if (cornerDistance_sq > this.rSquared) {
 			return null;
 		}
 
-		return { x: dist.x, y: dist.y, };
+		return dist;
 	}
 
-	move() {
+	move(constraints: Vec2) {
 		this.position.x += this.velocity.x;
 		this.position.y += this.velocity.y;
-		if (this.position.x + this.r > this.ctx.width) {
-			this.position.x = this.ctx.width - this.r;
-			this.velocity.x *= -1;
+
+		// Bounce on right
+		if (this.position.x + this.r >= constraints.x) {
+			this.position.x = constraints.y - this.r;
+			this.bounceX();
 		}
-		if (this.position.x - this.r < 0) {
+
+		// Bounce on left
+		if (this.position.x - this.r <= 0) {
 			this.position.x = this.r;
-			this.velocity.x *= -1;
+			this.bounceX();
 		}
-		if (this.position.y - this.r < 0) {
-			this.velocity.y *= -1;
+
+		// Bounce on top
+		if (this.position.y - this.r <= 0) {
+			this.bounceY();
 		}
 	}
+
+	bounceX(): void { this.velocity.x *= -1; }
+	bounceY(): void { this.velocity.y *= -1; }
 }
 
 export default Ball;
